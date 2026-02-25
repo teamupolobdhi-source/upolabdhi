@@ -1,0 +1,170 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 20% 98%;
+    --foreground: 220 20% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 220 20% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 20% 10%;
+    --primary: 235 70% 60%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 14% 94%;
+    --secondary-foreground: 220 20% 15%;
+    --muted: 220 14% 94%;
+    --muted-foreground: 220 10% 46%;
+    --accent: 235 60% 96%;
+    --accent-foreground: 235 70% 50%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 14% 90%;
+    --input: 220 14% 90%;
+    --ring: 235 70% 60%;
+    --radius: 0.75rem;
+
+    --gradient-start: 235 70% 60%;
+    --gradient-mid: 280 65% 58%;
+    --gradient-end: 330 65% 55%;
+    --glass-bg: 0 0% 100% / 0.7;
+    --glass-border: 220 20% 80% / 0.5;
+
+    --sidebar-background: 210 20% 97%;
+    --sidebar-foreground: 220 20% 20%;
+    --sidebar-primary: 235 70% 60%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 235 60% 96%;
+    --sidebar-accent-foreground: 235 70% 50%;
+    --sidebar-border: 220 14% 90%;
+    --sidebar-ring: 235 70% 60%;
+  }
+
+  .dark {
+    --background: 230 15% 6%;
+    --foreground: 220 15% 93%;
+    --card: 230 15% 9%;
+    --card-foreground: 220 15% 93%;
+    --popover: 230 15% 9%;
+    --popover-foreground: 220 15% 93%;
+    --primary: 235 70% 65%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 230 12% 14%;
+    --secondary-foreground: 220 15% 90%;
+    --muted: 230 12% 14%;
+    --muted-foreground: 220 10% 55%;
+    --accent: 235 30% 16%;
+    --accent-foreground: 235 70% 75%;
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 230 12% 18%;
+    --input: 230 12% 18%;
+    --ring: 235 70% 65%;
+
+    --gradient-start: 235 70% 65%;
+    --gradient-mid: 280 65% 62%;
+    --gradient-end: 330 65% 58%;
+    --glass-bg: 230 15% 8% / 0.8;
+    --glass-border: 230 15% 25% / 0.4;
+
+    --sidebar-background: 230 15% 7%;
+    --sidebar-foreground: 220 15% 90%;
+    --sidebar-primary: 235 70% 65%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 235 30% 16%;
+    --sidebar-accent-foreground: 235 70% 75%;
+    --sidebar-border: 230 12% 18%;
+    --sidebar-ring: 235 70% 65%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(var(--gradient-start)), hsl(var(--gradient-mid)), hsl(var(--gradient-end)));
+  }
+  .gradient-bg {
+    background-image: linear-gradient(135deg, hsl(var(--gradient-start)), hsl(var(--gradient-mid)), hsl(var(--gradient-end)));
+  }
+  .gradient-bg-subtle {
+    background-image: linear-gradient(135deg, hsl(var(--gradient-start) / 0.1), hsl(var(--gradient-end) / 0.05));
+  }
+  .glass {
+    background: hsl(var(--glass-bg));
+    backdrop-filter: blur(20px);
+    border: 1px solid hsl(var(--glass-border));
+  }
+  .glass-card {
+    @apply bg-card border border-border rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300;
+  }
+  .section-padding {
+    @apply py-24 md:py-32 px-4 md:px-8;
+  }
+}
+
+/* Marquee animations */
+@keyframes marquee-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-33.333%); }
+}
+
+@keyframes marquee-scroll-reverse {
+  0% { transform: translateX(-33.333%); }
+  100% { transform: translateX(0); }
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 30s linear infinite;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+.marquee-track-reverse {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll-reverse 35s linear infinite;
+}
+
+.marquee-track-reverse:hover {
+  animation-play-state: paused;
+}
+
+@media (max-width: 768px) {
+  .marquee-track {
+    animation-duration: 45s;
+  }
+
+  .marquee-track-reverse {
+    animation-duration: 50s;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .marquee-track,
+  .marquee-track-reverse {
+    animation: none;
+  }
+}
